@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import SongSelect from '../components/SongSelect';
-import SongDetail from '../components/SongDetail';
 
 class SongBox extends Component {
 
@@ -10,11 +9,12 @@ class SongBox extends Component {
       songs: [],
       selectedSongId: ''
     }
+
+    this.handleSongSelected = this.handleSongSelected.bind(this)
   }
-  render(){
-    return(
-      null
-    )
+
+  handleSongSelected(id){
+    this.setState({ selectedSongId: id})
   }
 
   componentDidMount(){
@@ -24,7 +24,24 @@ class SongBox extends Component {
          this.setState({
            songs: result.feed.entry
          })
+      },
+      error => {
+        this.setState({
+          error
+        });
       })
+  }
+
+  render(){
+    return(
+      <section>
+        <h1>Top 20 Songs on iTunes</h1>
+        <SongSelect
+          songs={this.state.songs}
+          onSongSelected={this.handleSongSelected}
+        />
+      </section>
+    )
   }
 
 }
