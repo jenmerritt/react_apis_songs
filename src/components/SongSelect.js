@@ -17,7 +17,6 @@ const SongSelect = props => {
     props.onSongSelected(event.target.value)
   }
 
-
   return (
     <select
       defaultValue="default"

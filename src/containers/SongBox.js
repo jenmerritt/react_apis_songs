@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import SongSelect from '../components/SongSelect';
+import SongDetail from '../components/SongDetail'
 
 class SongBox extends Component {
 
@@ -32,6 +33,13 @@ class SongBox extends Component {
       })
   }
 
+  getSelectedSong(){
+    const selectedSong = this.state.songs.find(song => {
+      return song.id.attributes['im:id'] === this.state.selectedSongId
+    })
+    return selectedSong
+  }
+
   render(){
     return(
       <section>
@@ -40,6 +48,7 @@ class SongBox extends Component {
           songs={this.state.songs}
           onSongSelected={this.handleSongSelected}
         />
+        <SongDetail song={this.getSelectedSong()} />
       </section>
     )
   }
